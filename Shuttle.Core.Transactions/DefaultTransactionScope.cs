@@ -78,7 +78,7 @@ namespace Shuttle.Core.Transactions
             }
             catch
             {
-                // _ignore --- may be bug in transaction _scope
+                // _ignore --- may be bug in TransactionScope
             }
         }
 
