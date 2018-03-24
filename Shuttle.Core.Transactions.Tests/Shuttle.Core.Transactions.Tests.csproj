@@ -9,16 +9,11 @@
     <PackageReference Include="NUnit" Version="3.9.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
+    <PackageReference Include="Shuttle.Core.Configuration" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Shuttle.Core.Transactions\Shuttle.Core.Transactions.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Shuttle.Core.Configuration">
-      <HintPath>..\..\..\..\Users\Eben.Roux\.nuget\packages\shuttle.core.configuration\10.0.0\lib\net46\Shuttle.Core.Configuration.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>
