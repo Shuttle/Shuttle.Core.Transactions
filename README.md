@@ -4,7 +4,7 @@
 PM> Install-Package Shuttle.Core.Transactions
 ```
 
-This package makes use of the .Net `TransactionScope` class to provide ambient transaction handling.  If you are using .Net Core and you experience a error enlisting the transaction then try to upgrade the `System.Data.SqlClient` package.  If you are using the `DefaultTransactionScopeFactory` then you can also set the `enabled` attribute to `false` but then all transaction handling should be coded in the handlers (not recommended).
+This package makes use of the .Net `TransactionScope` class to provide ambient transaction handling.  If you are using .Net Core and you experience an error enlisting a transaction then try to upgrade the `System.Data.SqlClient` package.  If you are using the `DefaultTransactionScopeFactory` then you can also set the `enabled` attribute to `false` but then all transaction handling should be coded in the handlers (not recommended).
 
 # ITransactionScope
 
