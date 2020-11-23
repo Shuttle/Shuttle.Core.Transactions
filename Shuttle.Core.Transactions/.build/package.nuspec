@@ -20,7 +20,7 @@
 	      <dependency id="Shuttle.Core.Configuration" version="{Shuttle.Core.Configuration-version}" />
 	    </group>
 
-	    <group targetFramework="netstandard2.0">
+	    <group targetFramework="netstandard2.1">
 	      <dependency id="Shuttle.Core.Logging" version="{Shuttle.Core.Logging-version}" />
 	      <dependency id="Shuttle.Core.Configuration" version="{Shuttle.Core.Configuration-version}" />
 	    </group>
