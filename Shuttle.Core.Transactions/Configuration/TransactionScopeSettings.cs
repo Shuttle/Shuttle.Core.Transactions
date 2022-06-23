@@ -2,16 +2,16 @@
 
 namespace Shuttle.Core.Transactions
 {
-    public class TransactionScopeConfiguration : ITransactionScopeConfiguration
+    public class TransactionScopeSettings
     {
-        public TransactionScopeConfiguration()
+        public const string SectionName = "Shuttle:TransactionScope";
+
+        public TransactionScopeSettings()
         {
-            Enabled = true;
             IsolationLevel = IsolationLevel.ReadCommitted;
             TimeoutSeconds = 30;
         }
 
-        public bool Enabled { get; set; }
         public IsolationLevel IsolationLevel { get; set; }
         public int TimeoutSeconds { get; set; }
     }
