@@ -16,7 +16,7 @@ In order to make use of transaction scopes:
 services.AddTransactionScope(options => 
 {
 	options.WithIsolationLevel(isolationLevel)
-	options.WithTimeoutSeconds(timeoutSeconds)
+	options.WithTimeout(timeout)
 });
 ```
 
@@ -33,7 +33,7 @@ The `appsettings.json` structure is as follows:
 	"Shuttle": {
 		"TransactionScope": {
 			"IsolationLevel": "isolation-level"
-			"TimeoutSeconds": 30
+			"Timeout": "00:00:30"
 		} 
 	}
 }
