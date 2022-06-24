@@ -1,11 +1,12 @@
-﻿using System.Transactions;
+﻿using System;
+using System.Transactions;
 
 namespace Shuttle.Core.Transactions
 {
     public class TransactionScopeOptions
     {
         internal IsolationLevel? IsolationLevel { get; private set; }
-        internal int? TimeoutSeconds { get; private set; }
+        internal TimeSpan? Timeout { get; private set; }
 
         public TransactionScopeOptions WithIsolationLevel(IsolationLevel isolationLevel)
         {
@@ -14,9 +15,9 @@ namespace Shuttle.Core.Transactions
             return this;
         }
 
-        public TransactionScopeOptions WithTimeoutSeconds(int timeoutSeconds)
+        public TransactionScopeOptions WithTimeout(TimeSpan timeout)
         {
-            TimeoutSeconds = timeoutSeconds;
+            Timeout = timeout;
             
             return this;
         }

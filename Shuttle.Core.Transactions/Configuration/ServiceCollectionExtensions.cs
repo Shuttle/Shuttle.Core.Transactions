@@ -24,7 +24,7 @@ namespace Shuttle.Core.Transactions
                 if (settings != null)
                 {
                     option.IsolationLevel = settings.IsolationLevel;
-                    option.TimeoutSeconds = settings.TimeoutSeconds;
+                    option.Timeout = settings.Timeout;
                 }
 
                 if (transactionScopeOptions.IsolationLevel.HasValue)
@@ -32,9 +32,9 @@ namespace Shuttle.Core.Transactions
                     option.IsolationLevel = transactionScopeOptions.IsolationLevel.Value;
                 }
 
-                if (transactionScopeOptions.TimeoutSeconds.HasValue)
+                if (transactionScopeOptions.Timeout.HasValue)
                 {
-                    option.TimeoutSeconds = transactionScopeOptions.TimeoutSeconds.Value;
+                    option.Timeout = transactionScopeOptions.Timeout.Value;
                 }
             });
 

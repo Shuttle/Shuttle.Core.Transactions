@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using System;
+using System.Transactions;
 
 namespace Shuttle.Core.Transactions
 {
@@ -9,10 +10,10 @@ namespace Shuttle.Core.Transactions
         public TransactionScopeSettings()
         {
             IsolationLevel = IsolationLevel.ReadCommitted;
-            TimeoutSeconds = 30;
+            Timeout = TimeSpan.FromSeconds(30);
         }
 
         public IsolationLevel IsolationLevel { get; set; }
-        public int TimeoutSeconds { get; set; }
+        public TimeSpan Timeout { get; set; }
     }
 }
