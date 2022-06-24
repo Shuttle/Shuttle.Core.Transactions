@@ -19,7 +19,7 @@ namespace Shuttle.Core.Transactions {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,38 +61,11 @@ namespace Shuttle.Core.Transactions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TransactionScope (&apos;{0}&apos;) using ambient transaction..
+        ///   Looks up a localized string similar to Service `ITransactionScopeFactory` has already been registered..
         /// </summary>
-        internal static string VerboseTransactionScopeAmbient {
+        internal static string AddTransactionScopeFactoryException {
             get {
-                return ResourceManager.GetString("VerboseTransactionScopeAmbient", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to TransactionScope (&apos;{0}&apos;) using ambient transaction has completed..
-        /// </summary>
-        internal static string VerboseTransactionScopeAmbientCompleted {
-            get {
-                return ResourceManager.GetString("VerboseTransactionScopeAmbientCompleted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to TransactionScope (&apos;{0}&apos;) has completed..
-        /// </summary>
-        internal static string VerboseTransactionScopeCompleted {
-            get {
-                return ResourceManager.GetString("VerboseTransactionScopeCompleted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to TransactionScope (&apos;{0}&apos;) created with isolation level &apos;{1}&apos; and timeout of &apos;{2}&apos;..
-        /// </summary>
-        internal static string VerboseTransactionScopeCreated {
-            get {
-                return ResourceManager.GetString("VerboseTransactionScopeCreated", resourceCulture);
+                return ResourceManager.GetString("AddTransactionScopeFactoryException", resourceCulture);
             }
         }
     }

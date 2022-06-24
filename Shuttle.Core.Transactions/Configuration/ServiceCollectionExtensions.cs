@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shuttle.Core.Contract;
@@ -36,6 +37,13 @@ namespace Shuttle.Core.Transactions
                     option.TimeoutSeconds = transactionScopeOptions.TimeoutSeconds.Value;
                 }
             });
+
+            var type = typeof(ITransactionScopeFactory);
+
+            if (services.Any(item => item.ServiceType == type))
+            {
+                throw new InvalidOperationException(Resources.AddTransactionScopeFactoryException);
+            }
 
             services.AddSingleton<ITransactionScopeFactory, TransactionScopeFactory>();
 
