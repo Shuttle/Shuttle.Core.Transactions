@@ -32,6 +32,7 @@ The `appsettings.json` structure is as follows:
 {
 	"Shuttle": {
 		"TransactionScope": {
+			"Enabled": true,
 			"IsolationLevel": "isolation-level"
 			"Timeout": "00:00:30"
 		} 

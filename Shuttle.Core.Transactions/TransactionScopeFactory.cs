@@ -17,7 +17,9 @@ namespace Shuttle.Core.Transactions
         }
         public ITransactionScope Create(IsolationLevel isolationLevel, TimeSpan timeout)
         {
-            return new DefaultTransactionScope(_settings.IsolationLevel, _settings.Timeout);
+            return _settings.Enabled
+                ? (ITransactionScope)new DefaultTransactionScope(_settings.IsolationLevel, _settings.Timeout)
+                : new NullTransactionScope();
         }
     }
 }

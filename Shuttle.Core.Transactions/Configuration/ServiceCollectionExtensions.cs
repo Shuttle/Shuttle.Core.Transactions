@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shuttle.Core.Contract;
-using Shuttle.Core.Data;
 
 namespace Shuttle.Core.Transactions
 {
@@ -25,6 +23,7 @@ namespace Shuttle.Core.Transactions
                 {
                     option.IsolationLevel = settings.IsolationLevel;
                     option.Timeout = settings.Timeout;
+                    option.Enabled = settings.Enabled;
                 }
 
                 if (transactionScopeOptions.IsolationLevel.HasValue)
@@ -38,21 +37,12 @@ namespace Shuttle.Core.Transactions
                 }
             });
 
-            var type = typeof(ITransactionScopeFactory);
-
-            if (services.Any(item => item.ServiceType == type))
+            if (services.Contains(ServiceDescriptor.Singleton<ITransactionScopeFactory, TransactionScopeFactory>()))
             {
                 throw new InvalidOperationException(Resources.AddTransactionScopeFactoryException);
             }
 
             services.AddSingleton<ITransactionScopeFactory, TransactionScopeFactory>();
-
-            return services;
-        }
-
-        public static IServiceCollection DisableTransactionScope(this IServiceCollection services)
-        {
-            services.AddSingleton<ITransactionScopeFactory, NullTransactionScopeFactory>();
 
             return services;
         }
