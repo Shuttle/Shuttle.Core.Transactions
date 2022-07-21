@@ -7,18 +7,24 @@ namespace Shuttle.Core.Transactions
 {
     public class TransactionScopeFactory : ITransactionScopeFactory
     {
-        private readonly TransactionScopeSettings _settings;
+        private readonly TransactionScopeOptions _options;
 
-        public TransactionScopeFactory(IOptions<TransactionScopeSettings> options)
+        public TransactionScopeFactory(IOptions<TransactionScopeOptions> options)
         {
             Guard.AgainstNull(options, nameof(options));
             
-            _settings = options.Value;
+            _options = options.Value;
         }
+
+        public ITransactionScope Create()
+        {
+            return Create(_options.IsolationLevel, _options.Timeout);
+        }
+
         public ITransactionScope Create(IsolationLevel isolationLevel, TimeSpan timeout)
         {
-            return _settings.Enabled
-                ? (ITransactionScope)new DefaultTransactionScope(_settings.IsolationLevel, _settings.Timeout)
+            return _options.Enabled
+                ? (ITransactionScope)new DefaultTransactionScope(isolationLevel, timeout)
                 : new NullTransactionScope();
         }
     }

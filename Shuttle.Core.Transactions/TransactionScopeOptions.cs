@@ -3,11 +3,11 @@ using System.Transactions;
 
 namespace Shuttle.Core.Transactions
 {
-    public class TransactionScopeSettings
+    public class TransactionScopeOptions
     {
         public const string SectionName = "Shuttle:TransactionScope";
 
-        public TransactionScopeSettings()
+        public TransactionScopeOptions()
         {
             Enabled = true;
             IsolationLevel = IsolationLevel.ReadCommitted;
