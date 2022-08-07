@@ -4,36 +4,29 @@
 PM> Install-Package Shuttle.Core.Transactions
 ```
 
-This package makes use of the .Net `TransactionScope` class to provide ambient transaction handling.  If you are using .Net Core and you experience an error enlisting a transaction then try to upgrade the `System.Data.SqlClient` package.  If you are using the `DefaultTransactionScopeFactory` then you can also set the `enabled` attribute to `false` but then all transaction handling should be coded in the handlers (not recommended).
+This package makes use of the .Net `TransactionScope` class to provide ambient transaction handling.
 
 ## Configuration
 
-The relevant components may be configured using `IServiceColletion`.
-
-In order to make use of transaction scopes:
+The relevant components may be configured using `IServiceColletion`:
 
 ```c#
-services.AddTransactionScope(options => 
+services.AddTransactionScope(builder => 
 {
-	options.WithIsolationLevel(isolationLevel)
-	options.WithTimeout(timeout)
+    builder.Options.Enabled = true;
+    builder.Options.IsolationLevel = isolationLevel;
+    builder.Options.Timeout = TimeSpan.FromSeconds(30);
 });
 ```
 
-To register the `NullTransactionScoopeFactory`:
-
-```c#
-services.DisableTransactionScope();
-```
-
-The `appsettings.json` structure is as follows:
+The default JSON settings structure is as follows::
 
 ```json
 {
 	"Shuttle": {
 		"TransactionScope": {
 			"Enabled": true,
-			"IsolationLevel": "isolation-level"
+			"IsolationLevel": "isolation-level",
 			"Timeout": "00:00:30"
 		} 
 	}
@@ -48,8 +41,6 @@ The `DefaultTransactionScope` makes use of the standard .NET `TransactionScope` 
 
 ## Properties
 
-### Name
-
 ``` c#
 Guid Id { get; }
 ```
@@ -57,8 +48,6 @@ Guid Id { get; }
 Returns the Id of the transaction scope.
 
 ## Methods
-
-### Complete
 
 ``` c#
 void Complete();
@@ -70,7 +59,7 @@ Marks the transaction scope as complete.
 
 An implementation of the `ITransactionScopeFactory` interface provides instances of an `ITransactionScope` implementation.
 
-The `TransactionScopeFactory` provides a `DefaultTransactionScope` instance.
+The `TransactionScopeFactory` provides a `DefaultTransactionScope` instance if transaction scopes are `Enabled`; else a `NullTransactionScope` that implements the null pattern.
 
 ## Create
 
