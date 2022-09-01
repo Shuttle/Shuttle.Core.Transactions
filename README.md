@@ -4,7 +4,34 @@
 PM> Install-Package Shuttle.Core.Transactions
 ```
 
-This package makes use of the .Net `TransactionScope` class to provide ambient transaction handling.  If you are using .Net Core and you experience an error enlisting a transaction then try to upgrade the `System.Data.SqlClient` package.  If you are using the `DefaultTransactionScopeFactory` then you can also set the `enabled` attribute to `false` but then all transaction handling should be coded in the handlers (not recommended).
+This package makes use of the .Net `TransactionScope` class to provide ambient transaction handling.
+
+## Configuration
+
+The relevant components may be configured using `IServiceColletion`:
+
+```c#
+services.AddTransactionScope(builder => 
+{
+    builder.Options.Enabled = true;
+    builder.Options.IsolationLevel = isolationLevel;
+    builder.Options.Timeout = TimeSpan.FromSeconds(30);
+});
+```
+
+The default JSON settings structure is as follows::
+
+```json
+{
+	"Shuttle": {
+		"TransactionScope": {
+			"Enabled": true,
+			"IsolationLevel": "isolation-level",
+			"Timeout": "00:00:30"
+		} 
+	}
+}
+```
 
 # ITransactionScope
 
@@ -14,17 +41,13 @@ The `DefaultTransactionScope` makes use of the standard .NET `TransactionScope` 
 
 ## Properties
 
-### Name
-
 ``` c#
-string Name { get; }
+Guid Id { get; }
 ```
 
-Returns the name of the transaction scope.  This is helpful with logging.
+Returns the Id of the transaction scope.
 
 ## Methods
-
-### Complete
 
 ``` c#
 void Complete();
@@ -36,34 +59,12 @@ Marks the transaction scope as complete.
 
 An implementation of the `ITransactionScopeFactory` interface provides instances of an `ITransactionScope` implementation.
 
-The `DefaultTransactionScopeFactory` provides a `DefaultTransactionScope` instance if transactions are `Enabled`; else an instance of `NullTransactionScope` is provided.
+The `TransactionScopeFactory` provides a `DefaultTransactionScope` instance if transaction scopes are `Enabled`; else a `NullTransactionScope` that implements the null pattern.
 
 ## Create
 
 ``` c#
-ITransactionScope Create(string name);
-ITransactionScope Create(string name, IsolationLevel isolationLevel, TimeSpan timeout);
-ITransactionScope Create();
 ITransactionScope Create(IsolationLevel isolationLevel, TimeSpan timeout);
 ```
 
 Creates the relevant instance using the given parameters.
-
-## Configuration Section
-
-There is also a configuration section that can be used:
-
-``` xml
-<configuration>
-  <configSections>
-    <section name="transactionScope" type="Shuttle.Core.Infrastructure.TransactionScopeSection, Shuttle.Core.Infrastructure"/>
-  </configSections>
-
-  <transactionScope
-      enabled="false"
-      isolationLevel="RepeatableRead"
-      timeoutSeconds="300" />
-</configuration>
-```
-
-Call the static `TransactionScopeSection.Get()` method to return the configuration.
