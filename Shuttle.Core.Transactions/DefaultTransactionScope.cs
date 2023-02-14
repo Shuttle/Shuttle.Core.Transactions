@@ -20,7 +20,8 @@ namespace Shuttle.Core.Transactions
                 {
                     IsolationLevel = isolationLevel,
                     Timeout = timeout
-                });
+                },
+                TransactionScopeAsyncFlowOption.Enabled);
         }
 
         public void Dispose()
